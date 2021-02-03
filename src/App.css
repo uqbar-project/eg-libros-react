@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.titulo {
+  font-size: 2rem;
+  margin: 1rem 2rem;
+  padding: 1rem 2rem;
+  background-color: rgb(224, 214, 214);
+}
+
+.section {
+  margin: 1rem 1rem;
+}

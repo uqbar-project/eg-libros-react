@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { PrestamosRoutes } from './routes'
+import { libroService } from './services/libroService'
+import { personaService } from './services/personaService'
+import { prestamoService } from './services/prestamoService'
+
+async function init() {
+  const medina = await personaService.findByNombre('Medina')
+  const santos = await personaService.findByNombre('Santos')
+  const laNovelaDePeron = await libroService.findByTitulo('Novela')
+  const elAleph = await libroService.findByTitulo('Aleph')
+  await prestamoService.prestar(laNovelaDePeron, medina)
+  await prestamoService.prestar(elAleph, santos)
+}
+
+init()
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PrestamosRoutes />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
