@@ -1,20 +1,16 @@
+import axios from 'axios'
 import { Libro } from '../domain/libro'
-
-const libros = [
-  new Libro('El Aleph', 'Jorge Luis Borges', true),
-  new Libro('La guerra y la paz', 'León Tolstoi'),
-  new Libro('La novela de Perón', 'Tomás Eloy Martínez', true),
-  new Libro('Crimen y castigo', 'Fyodor Dostoievsky'),
-  new Libro('Recuerdos del futuro', 'Siri Hustvedt'),
-]
+import { SERVER_CONNECTION } from './constants'
 
 class LibroService {
   
   async getLibrosPrestables(valorABuscar) {
-    return libros.filter((libro) => libro.estaDisponible() && libro.titulo.toLowerCase().includes(valorABuscar.toLowerCase()))
+    const librosJson = await axios.get(SERVER_CONNECTION + '/libros/' + valorABuscar)
+    return librosJson.data.map((libroJson) => new Libro(libroJson.id, libroJson.titulo, libroJson.autor, libroJson.estado === 'P'))
   }
 
   async findByTitulo(titulo) {
+    const libros = await getLibrosPrestables(valorABuscar)
     return libros.find((libro) => libro.titulo.toLowerCase().includes(titulo.toLowerCase()))
   }
 }

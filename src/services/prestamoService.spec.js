@@ -7,7 +7,7 @@ const medina = {
   'password' : 'Piquito'
 }
 
-const laNovelaDePeron = new Libro('La novela de Perón', 'Tomás Eloy Martínez')
+const laNovelaDePeron = new Libro(1, 'La novela de Perón', 'Tomás Eloy Martínez')
 
 beforeEach(async () => {
   await prestamoService.prestar(laNovelaDePeron, medina)

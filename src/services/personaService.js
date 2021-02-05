@@ -1,34 +1,15 @@
-const personas = [
-  {
-    'id': 1,
-    'nombre' : 'Lampone',
-    'password' : 'Osorio',
-  },
-  {
-    'id': 2,
-    'nombre' : 'Medina',
-    'password' : 'Piquito',
-  },
-  {
-    'id': 3,
-    'nombre' : 'Ravena',
-    'password' : 'Cozzetti',
-  },
-  {
-    'id': 4,
-    'nombre' : 'Santos',
-    'password' : 'Milazzo',
-  },
-]
+import axios from 'axios'
+import { SERVER_CONNECTION } from './constants'
 
 class PersonaService {
 
   async getPersonas() {
-    return personas
+    const personasJson = await axios.get(SERVER_CONNECTION + '/personas')
+    return personasJson.data
   }
 
   async findByNombre(nombre) {
-    return personas.find((persona) => persona.nombre.toLowerCase().includes(nombre.toLowerCase()))
+    return (await getPersonas).find((persona) => persona.nombre.toLowerCase().includes(nombre.toLowerCase()))
   }
 }
 

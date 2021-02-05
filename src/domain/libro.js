@@ -4,7 +4,8 @@ const LIBRE = 'L'
 const PRESTADO = 'P'
 
 export class Libro {
-  constructor(titulo, autor, prestado = false) {
+  constructor(id, titulo, autor, prestado = false) {
+    this.id = id
     this.titulo = titulo
     this.autor = autor
     this.activo = true
