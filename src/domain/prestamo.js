@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 export class Prestamo {
   constructor(libro, persona, fechaPrestamo = new Date()) {
@@ -8,16 +8,17 @@ export class Prestamo {
     this.fechaDevolucion = undefined
   }
 
-  devolver() {
-    this.fechaDevolucion = new Date()
-    this.libro.devolver()
-  }
-
   pendiente() {
     return !this.fechaDevolucion
   }
 
   get fechaAMostrar() {
     return format(this.fechaPrestamo, 'dd/MM/yyyy')
+  }
+  
+  static fromJSON(prestamoJson) {
+    const nuevoPrestamo = new Prestamo(prestamoJson.libro, prestamoJson.persona, parseISO(prestamoJson.fechaPrestamo))
+    nuevoPrestamo.id = prestamoJson.id
+    return nuevoPrestamo
   }
 }

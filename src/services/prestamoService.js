@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { parseISO } from 'date-fns/esm'
 import { Libro } from '../domain/libro'
 import { Prestamo } from '../domain/prestamo'
 import { SERVER_CONNECTION } from './constants'
@@ -9,9 +8,7 @@ class PrestamoService {
 
   async getPrestamosPendientes() {
     const prestamosJson = await axios.get(SERVER_CONNECTION + '/prestamos')
-    return prestamosJson.data.map((prestamoJson) => 
-      new Prestamo(prestamoJson.libro, prestamoJson.persona, parseISO(prestamoJson.fechaPrestamo))
-    )
+    return prestamosJson.data.map((prestamoJson) => Prestamo.fromJSON(prestamoJson))
   }
 
   async prestar(libro, persona) {
@@ -23,7 +20,7 @@ class PrestamoService {
   }
   
   async devolver(prestamo) {
-    prestamo.devolver()
+    await axios.patch(SERVER_CONNECTION + '/prestamos', prestamo)
   }
 }
 
