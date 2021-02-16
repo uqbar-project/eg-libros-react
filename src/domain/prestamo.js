@@ -17,7 +17,8 @@ export class Prestamo {
   }
   
   static fromJSON(prestamoJson) {
-    const nuevoPrestamo = new Prestamo(prestamoJson.libro, prestamoJson.persona, parseISO(prestamoJson.fechaPrestamo))
+    const fecha = prestamoJson.fechaPrestamo ? parseISO(prestamoJson.fechaPrestamo) : new Date()
+    const nuevoPrestamo = new Prestamo(prestamoJson.libro, prestamoJson.persona, fecha)
     nuevoPrestamo.id = prestamoJson.id
     return nuevoPrestamo
   }
