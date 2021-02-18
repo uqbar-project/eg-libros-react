@@ -19,8 +19,13 @@ export const NuevoPrestamo = function() {
 
   useEffect(() => {
     const getPersonas = async function() {
-      const personas = await personaService.getPersonas()
-      setPersonas(personas)
+      try {
+        const personas = await personaService.getPersonas()
+        setPersonas(personas)
+      } catch (e) {
+        console.log(e)
+        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer las personas. Revise el log para más detalles.'})
+      }
     }
     getPersonas()
   }, [])
@@ -31,6 +36,7 @@ export const NuevoPrestamo = function() {
       toast.current.show({severity: 'success', summary: 'Préstamo de libros', detail: `Se prestó el libro ${libro.titulo} a ${persona.nombre} exitosamente`})
       history.push('/')
     } catch (e) {
+      console.log(e)
       toast.current.show({severity: 'error', summary: 'Error al generar el préstamo', detail: e.message})
     }
   }
