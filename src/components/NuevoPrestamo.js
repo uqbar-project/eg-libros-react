@@ -14,8 +14,8 @@ export const NuevoPrestamo = function() {
   const [libros, setLibros] = useState([])
   const [libro, setLibro] = useState(undefined)
   const [persona, setPersona] = useState(undefined)
-  const toast = createRef()
   const history = useHistory()
+  const toast = createRef()
 
   useEffect(() => {
     const getPersonas = async function() {
@@ -24,7 +24,7 @@ export const NuevoPrestamo = function() {
         setPersonas(personas)
       } catch (e) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer las personas. Revise el log para más detalles.'})
+        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer las personas. Revise el log para más detalles.', detail: e.message})
       }
     }
     getPersonas()

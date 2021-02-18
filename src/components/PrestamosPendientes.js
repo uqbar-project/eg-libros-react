@@ -17,7 +17,7 @@ export const PrestamosPendientes = function() {
         setPrestamosPendientes(prestamos)
       } catch (e) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer los préstamos pendientes. Revise el log para más detalles.'})
+        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer los préstamos pendientes. Revise el log para más detalles.', detail: e.message})
       }
     }
     getPrestamosPendientes()
@@ -28,10 +28,10 @@ export const PrestamosPendientes = function() {
       try {
         await prestamoService.devolver(prestamo)
         const prestamos = await prestamoService.getPrestamosPendientes()
-        await setPrestamosPendientes(prestamos)
+        setPrestamosPendientes(prestamos)
       } catch (e) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al intentar devolver el préstamo pendiente. Revise el log para más detalles.'})
+        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al intentar devolver el préstamo pendiente. Revise el log para más detalles.', detail: e.message})
       }
     }}
   />
