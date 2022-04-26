@@ -6,7 +6,7 @@ import { createRef, useEffect, useState } from 'react'
 import { personaService } from '../services/personaService'
 import { libroService } from '../services/libroService'
 import { prestamoService } from '../services/prestamoService'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const NuevoPrestamo = function() {
 
@@ -14,7 +14,7 @@ export const NuevoPrestamo = function() {
   const [libros, setLibros] = useState([])
   const [libro, setLibro] = useState(undefined)
   const [persona, setPersona] = useState(undefined)
-  const history = useHistory()
+  const navigate = useNavigate()
   const toast = createRef()
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const NuevoPrestamo = function() {
     try {
       await prestamoService.prestar(libro, persona)
       toast.current.show({severity: 'success', summary: 'Préstamo de libros', detail: `Se prestó el libro ${libro.titulo} a ${persona.nombre} exitosamente`})
-      history.push('/')
+      navigate('/')
     } catch (e) {
       console.log(e)
       toast.current.show({severity: 'error', summary: 'Error al generar el préstamo', detail: e.message})

@@ -10,7 +10,7 @@ class LibroService {
   }
 
   async findByTitulo(titulo) {
-    const libros = await getLibrosPrestables(valorABuscar)
+    const libros = await this.getLibrosPrestables(titulo)
     return libros.find((libro) => libro.titulo.toLowerCase().includes(titulo.toLowerCase()))
   }
 }

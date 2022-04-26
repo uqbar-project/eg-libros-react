@@ -1,13 +1,14 @@
 import { Button } from 'primereact/button'
-import { Column, DataTable } from 'primereact/datatable'
+import { DataTable } from 'primereact/datatable'
+import { Column } from 'primereact/column'
 import { useState, useEffect, createRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { prestamoService } from '../services/prestamoService'
 import { Toast } from 'primereact/toast'
 
 export const PrestamosPendientes = function() {
   const [prestamosPendientes, setPrestamosPendientes] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
   const toast = createRef()
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export const PrestamosPendientes = function() {
         <Column field="fechaAMostrar" header="Fecha del préstamo"></Column>
         <Column body={devolver} style={{width:'7em'}} />
       </DataTable>
-      <Button icon="pi pi-plus" label="Prestar un nuevo libro" className="p-button-primary p-button-outlined p-button-rounded" onClick={() => { history.push('/nuevoPrestamo')}}></Button>
+      <Button icon="pi pi-plus" label="Prestar un nuevo libro" className="p-button-primary p-button-outlined p-button-rounded" onClick={() => { navigate('/nuevoPrestamo')}}></Button>
     </div>
   )
 }

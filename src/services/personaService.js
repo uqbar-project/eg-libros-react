@@ -9,7 +9,8 @@ class PersonaService {
   }
 
   async findByNombre(nombre) {
-    return (await getPersonas).find((persona) => persona.nombre.toLowerCase().includes(nombre.toLowerCase()))
+    const personas = await this.getPersonas()
+    return personas.find((persona) => persona.nombre.toLowerCase().includes(nombre.toLowerCase()))
   }
 }
 
