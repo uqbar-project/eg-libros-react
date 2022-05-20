@@ -46,7 +46,7 @@ export const PrestamosPendientes = function() {
         <Column field="libro.titulo" header="Libro"></Column>
         <Column field="persona.nombre" header="Persona"></Column>
         <Column field="fechaAMostrar" header="Fecha del préstamo"></Column>
-        <Column body={devolver} style={{width:'7em'}} />
+        <Column body={devolver} style={{width:'15em'}} />
       </DataTable>
       <Button icon="pi pi-plus" label="Prestar un nuevo libro" className="p-button-primary p-button-outlined p-button-rounded" onClick={() => { navigate('/nuevoPrestamo')}}></Button>
     </div>
