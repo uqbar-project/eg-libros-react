@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { Libro } from '../domain/libro'
-import { Prestamo } from '../domain/prestamo'
 import { SERVER_CONNECTION } from './constants'
+import { Prestamo } from 'src/domain/prestamo'
+import { Libro } from 'src/domain/libro'
 
 class PrestamoService {
   prestamos = []

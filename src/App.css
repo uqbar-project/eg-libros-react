@@ -29,5 +29,9 @@
 }
 
 table {
-  margin: 1rem;
+  margin: 0;
+}
+
+.botonera {
+  margin: 1rem 0;
 }

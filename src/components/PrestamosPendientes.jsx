@@ -3,8 +3,8 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { useState, useEffect, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { prestamoService } from '../services/prestamoService'
 import { Toast } from 'primereact/toast'
+import { prestamoService } from 'src/services/prestamoService'
 
 export const PrestamosPendientes = function() {
   const [prestamosPendientes, setPrestamosPendientes] = useState([])
@@ -22,6 +22,7 @@ export const PrestamosPendientes = function() {
       }
     }
     getPrestamosPendientes()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function devolver(prestamo) {
@@ -48,7 +49,9 @@ export const PrestamosPendientes = function() {
         <Column field="fechaAMostrar" header="Fecha del préstamo"></Column>
         <Column body={devolver} style={{width:'15em'}} />
       </DataTable>
-      <Button icon="pi pi-plus" label="Prestar un nuevo libro" className="p-button-primary p-button-outlined p-button-rounded" onClick={() => { navigate('/nuevoPrestamo')}}></Button>
+      <div className="botonera">
+        <Button icon="pi pi-plus" label="Prestar un nuevo libro" className="p-button-primary p-button-outlined p-button-rounded" onClick={() => { navigate('/nuevoPrestamo')}}></Button>
+      </div>
     </div>
   )
 }

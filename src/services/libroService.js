@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { Libro } from '../domain/libro'
 import { SERVER_CONNECTION } from './constants'
+import { Libro } from 'src/domain/libro'
 
 class LibroService {
   

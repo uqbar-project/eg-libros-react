@@ -3,10 +3,10 @@ import { Dropdown } from 'primereact/dropdown'
 import { AutoComplete } from 'primereact/autocomplete'
 import { Toast } from 'primereact/toast'
 import { createRef, useEffect, useState } from 'react'
-import { personaService } from '../services/personaService'
-import { libroService } from '../services/libroService'
-import { prestamoService } from '../services/prestamoService'
 import { useNavigate } from 'react-router-dom'
+import { libroService } from 'src/services/libroService'
+import { prestamoService } from 'src/services/prestamoService'
+import { personaService } from 'src/services/personaService'
 
 export const NuevoPrestamo = function() {
 
