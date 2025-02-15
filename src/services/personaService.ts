@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { SERVER_CONNECTION } from './constants'
+import { Persona } from '../domain/persona'
+import { compare } from './util'
 
 class PersonaService {
 
@@ -8,9 +10,9 @@ class PersonaService {
     return personasJson.data
   }
 
-  async findByNombre(nombre) {
+  async findByNombre(nombre: string) {
     const personas = await this.getPersonas()
-    return personas.find((persona) => persona.nombre.toLowerCase().includes(nombre.toLowerCase()))
+    return personas.find((persona: Persona) => compare(persona.nombre, nombre))
   }
 }
 

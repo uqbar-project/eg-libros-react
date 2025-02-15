@@ -4,44 +4,48 @@ import { AutoComplete } from 'primereact/autocomplete'
 import { Toast } from 'primereact/toast'
 import { createRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { libroService } from 'src/services/libroService'
-import { prestamoService } from 'src/services/prestamoService'
-import { personaService } from 'src/services/personaService'
+import { personaService } from '../services/personaService'
+import { prestamoService } from '../services/prestamoService'
+import { libroService } from '../services/libroService'
+import { Libro } from '../domain/libro'
+import { Persona } from '../domain/persona'
 
 export const NuevoPrestamo = function() {
 
   const [personas, setPersonas] = useState([])
-  const [libros, setLibros] = useState([])
-  const [libro, setLibro] = useState(undefined)
-  const [persona, setPersona] = useState(undefined)
+  const [libros, setLibros] = useState<Libro[]>([])
+  const [libro, setLibro] = useState<Libro | undefined>(undefined)
+  const [persona, setPersona] = useState<Persona | undefined>(undefined)
   const navigate = useNavigate()
-  const toast = createRef()
+  const toast = createRef<Toast>()
 
   useEffect(() => {
     const getPersonas = async function() {
       try {
         const personas = await personaService.getPersonas()
         setPersonas(personas)
-      } catch (e) {
+      } catch (e: unknown) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer las personas. Revise el log para más detalles.', detail: e.message})
+        toast.current!.show({ severity: 'error', summary: 'Ocurrió un error al traer las personas. Revise el log para más detalles.', detail: (e as Error).message})
       }
     }
     getPersonas()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function prestar() {
     try {
+      if (!libro || !persona) return
       await prestamoService.prestar(libro, persona)
-      toast.current.show({severity: 'success', summary: 'Préstamo de libros', detail: `Se prestó el libro ${libro.titulo} a ${persona.nombre} exitosamente`})
+      toast.current!.show({severity: 'success', summary: 'Préstamo de libros', detail: `Se prestó el libro ${libro.titulo} a ${persona.nombre} exitosamente`})
       navigate('/')
-    } catch (e) {
+    } catch (e: unknown) {
       console.log(e)
-      toast.current.show({severity: 'error', summary: 'Error al generar el préstamo', detail: e.message})
+      toast.current!.show({severity: 'error', summary: 'Error al generar el préstamo', detail: (e as Error).message})
     }
   }
 
-  async function buscarLibro(event) {
+  async function buscarLibro(event: { query: string }) {
     setLibros(await libroService.getLibrosPrestables(event.query))
   }
 

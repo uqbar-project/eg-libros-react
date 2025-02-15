@@ -1,7 +1,7 @@
 :root, body, table, button, div, span.p-dropdown-label, input {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Ubuntu', 'Cantarell', 
+  font-family: Roboto, 'Cantarell', Ubuntu, 'Helvetica Neue', 'Oxygen', 'Droid Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+  'Fira Sans'
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

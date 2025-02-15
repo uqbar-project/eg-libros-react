@@ -1,10 +1,10 @@
 import './App.css'
-import { PrestamosRoutes } from './routes'
+import { PrestamosRouter } from './routes'
 
 function App() {
   return (
     <div className="App">
-      <PrestamosRoutes />
+      <PrestamosRouter />
     </div>
   )
 }

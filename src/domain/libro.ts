@@ -1,11 +1,11 @@
-const LIBRE = 'L'
-const PRESTADO = 'P'
+export const LIBRE = 'L'
+export const PRESTADO = 'P'
 
 export class Libro {
-  constructor(id, titulo, autor, prestado = false) {
-    this.id = id
-    this.titulo = titulo
-    this.autor = autor
+  activo = true
+  estado: string
+
+  constructor(public id: number, public titulo: string, public autor: string, prestado = false) {
     this.activo = true
     this.estado = prestado ? PRESTADO : LIBRE
   }
