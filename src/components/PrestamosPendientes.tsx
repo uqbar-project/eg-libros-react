@@ -4,12 +4,13 @@ import { Column } from 'primereact/column'
 import { useState, useEffect, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Toast } from 'primereact/toast'
-import { prestamoService } from 'src/services/prestamoService'
+import { prestamoService } from '../services/prestamoService'
+import { Prestamo } from '../domain/prestamo'
 
 export const PrestamosPendientes = function() {
   const [prestamosPendientes, setPrestamosPendientes] = useState([])
   const navigate = useNavigate()
-  const toast = createRef()
+  const toast = createRef<Toast>()
 
   useEffect(() => {
     const getPrestamosPendientes = async function() {
@@ -18,14 +19,14 @@ export const PrestamosPendientes = function() {
         setPrestamosPendientes(prestamos)
       } catch (e) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al traer los préstamos pendientes. Revise el log para más detalles.', detail: e.message})
+        toast.current!.show({ severity: 'error', summary: 'Ocurrió un error al traer los préstamos pendientes. Revise el log para más detalles.', detail: (e as Error).message})
       }
     }
     getPrestamosPendientes()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function devolver(prestamo) {
+  function devolver(prestamo: Prestamo) {
     return <Button icon="pi pi-replay" tooltip="Devolver" className="p-button-secondary p-button-raised p-button-rounded" onClick={async () => {
       try {
         await prestamoService.devolver(prestamo)
@@ -33,7 +34,7 @@ export const PrestamosPendientes = function() {
         setPrestamosPendientes(prestamos)
       } catch (e) {
         console.log(e)
-        toast.current.show({ severity: 'error', summary: 'Ocurrió un error al intentar devolver el préstamo pendiente. Revise el log para más detalles.', detail: e.message})
+        toast.current!.show({ severity: 'error', summary: 'Ocurrió un error al intentar devolver el préstamo pendiente. Revise el log para más detalles.', detail: (e as Error).message})
       }
     }}
   />

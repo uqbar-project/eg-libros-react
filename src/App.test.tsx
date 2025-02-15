@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
 import { prestamoService } from './services/prestamoService'
+import { afterEach, beforeEach, expect, describe, test, vi } from "vitest"
 
 describe('App', () => {
 
   beforeEach(() => {
-    vi.spyOn(prestamoService, 'getPrestamosPendientes').mockImplementation(() => [])
+    vi.spyOn(prestamoService, 'getPrestamosPendientes').mockImplementation(() => Promise.resolve([]))
   })
 
   test('renders learn react link', () => {
