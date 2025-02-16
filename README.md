@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Préstamo de libros (frontend React)
 
-Currently, two official plugins are available:
+[![Build React App](https://github.com/uqbar-project/eg-libros-react/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-libros-react/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/uqbar-project/eg-libros-react/graph/badge.svg?token=HTCGVZZIHB)](https://codecov.io/gh/uqbar-project/eg-libros-react)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![demo](./images/video.gif)
 
-## Expanding the ESLint configuration
+Esta aplicación sirve para mostrar la integración de un frontend contra una API que puede estar hecha en cualquier tecnología.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Objetivo
 
-- Configure the top-level `parserOptions` property like this:
+Permitir que una institución gestione los préstamos de libros, por eso los casos de uso que necesitamos son:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Generar un préstamo
+- Devolver un libro, visualizando los préstamos pendientes de las personas
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Apunte
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- [Apunte con la explicación completa del modelado](https://docs.google.com/document/d/1kLAsruPYKZBNB0zi40_ORYavt_daQzEpaz2tf6pB6zw/edit?usp=sharing)
+## Interacción con el backend
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+A continuación describiremos las llamadas a API que utiliza este proyecto
+
+- Página principal: Préstamos pendientes
+  - `GET /prestamos`: devuelve los préstamos pendientes (que todavía no fueron devueltos)
+  - `PATCH /prestamos`: en el body recibe un préstamo y lo marca como devuelto
+- Página Nuevo préstamo
+  - `GET /libros`: devuelve los libros disponibles en el sistema
+  - `GET /personas`: devuelve las personas activas
+  - `POST /prestamos`: en el body recibe un préstamo y lo crea
+
+Para ver el modelo más en detalle, recomendamos navegar la carpeta [domain](./src/domain)
+
